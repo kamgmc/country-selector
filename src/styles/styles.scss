@@ -1,0 +1,18 @@
+#app {
+  --font-color: hsl(200, 15%, 8%);
+  --element-color: hsl(0, 0%, 100%);
+  --background-color: hsl(0, 0%, 98%);
+  --input-font-color: hsl(0, 0%, 52%);
+}
+
+#app.dark {
+  --font-color: hsl(0, 0%, 100%);
+  --element-color: hsl(209, 23%, 22%);
+  --background-color: hsl(207, 26%, 17%);
+  --input-font-color: hsl(0, 0%, 100%);
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito Sans', sans-serif;
+}
