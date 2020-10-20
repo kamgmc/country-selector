@@ -39,6 +39,13 @@ export default new Vuex.Store({
           context.commit('setCountries', response.data)
         })
         .catch(reason => console.warn(reason))
+    },
+    getCountriesByName (context, name) {
+      axios.get(`${process.env.VUE_APP_API_URL}name/${name + COUNTRY_FIELD_FILTER}`)
+        .then((response) => {
+          context.commit('setCountries', response.data)
+        })
+        .catch(reason => console.warn(reason))
     }
   }
 })

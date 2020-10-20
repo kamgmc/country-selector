@@ -3,7 +3,9 @@
     <div class="hero-head">
       <div class="container is-fluid">
         <div class="columns is-marginless">
-          <div class="column"></div>
+          <div class="column is-flex is-align-items-center">
+            <SearchBar></SearchBar>
+          </div>
           <div class="column is-flex region">
             <AppSelect
               placeholder="Filter By Region"
@@ -31,6 +33,7 @@
 
 import Country from '@/components/Country'
 import AppSelect from '@/components/AppSelect'
+import SearchBar from '@/components/SearchBar'
 
 export default {
   name: 'Home',
@@ -58,6 +61,7 @@ export default {
     }
   },
   components: {
+    SearchBar,
     AppSelect,
     Country
   }
@@ -77,12 +81,13 @@ export default {
     padding: 2.75rem 2rem 0 2rem;
 
     @include mobile {
-      padding: 2.75rem .75rem 0 .75rem;
+      padding: 1.75rem .75rem .5rem .75rem;
 
       .container {
         padding: 0;
 
         .column.region {
+          margin-top: 2.5rem;
           justify-content: flex-start;
         }
       }
