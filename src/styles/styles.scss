@@ -17,13 +17,20 @@ $weight-normal: 300;
 $weight-medium: 600;
 $weight-bold: 800;
 $body-weight: $weight-normal;
+$body-color: var(--font-color);
+$box-color: $body-color;
+$box-shadow: 0 0.2em .5em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
 
 
 // Import only what you need from Bulma
 @import "~bulma/sass/utilities/_all.sass";
 @import "~bulma/sass/base/_all.sass";
 @import "~bulma/sass/helpers/typography.sass";
+@import "~bulma/sass/helpers/flexbox.sass";
 @import "~bulma/sass/elements/button.sass";
 @import "~bulma/sass/elements/container.sass";
+@import "~bulma/sass/elements/box.sass";
+@import "~bulma/sass/elements/image.sass";
 @import "~bulma/sass/grid/columns.sass";
 @import "~bulma/sass/layout/hero.sass";
+@import "~bulma/sass/components/dropdown.sass";

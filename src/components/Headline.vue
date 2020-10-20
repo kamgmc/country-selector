@@ -40,13 +40,15 @@ export default {
 @import "~bulma/sass/utilities/_all.sass";
 
 #headline {
+  position: relative;
   background-color: var(--element-color);
   -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+  z-index: 99;
 
   .hero-body {
-    padding: 1.5rem 4rem;
+    padding: 2rem 4rem;
 
     .column {
       padding: 0;
@@ -64,13 +66,13 @@ export default {
         text-decoration: none;
 
         i {
-          margin-right: 2px;
+          margin-right: 4px;
         }
       }
     }
 
     @include mobile {
-      padding: 1.5rem 2rem;
+      padding: 2rem 2rem;
 
       .column.title {
         font-size: 14px;
