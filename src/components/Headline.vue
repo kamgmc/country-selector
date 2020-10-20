@@ -1,14 +1,14 @@
 <template>
   <header id="headline" class="hero">
     <div class="hero-body">
-      <div class="container">
-        <div class="columns is-mobile">
+      <div class="container is-fluid">
+        <div class="columns is-marginless is-mobile">
           <div class="column has-text-weight-bold title">
             Where in the world?
           </div>
           <div class="column has-text-right">
             <button
-              class="button is-text mode-button"
+              class="button is-text mode-button is-paddingless"
               @click="toggleDarkMode">
               <i class="fas" :class="{'fa-moon': !dark, 'fa-sun': dark}"></i>
               {{ dark ? 'Light' : 'Dark' }} mode
@@ -48,7 +48,7 @@ export default {
   z-index: 99;
 
   .hero-body {
-    padding: 2rem 4rem;
+    padding: 1.25rem 2rem;
 
     .column {
       padding: 0;
@@ -72,7 +72,11 @@ export default {
     }
 
     @include mobile {
-      padding: 2rem 2rem;
+      padding: 1.25rem .75rem;
+
+      .container {
+        padding: 0;
+      }
 
       .column.title {
         font-size: 14px;
