@@ -1,13 +1,21 @@
 <template>
-  <header id="headline">
-    <div class="title">Where in the world?</div>
-    <div class="mode-wrapper">
-      <button
-        class="btn-mode"
-        @click="toggleDarkMode">
-        <i class="fas" :class="{'fa-moon': !dark, 'fa-sun': dark}"></i>
-        {{ dark ? 'Light' : 'Dark' }} mode
-      </button>
+  <header id="headline" class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-mobile">
+          <div class="column has-text-weight-bold title">
+            Where in the world?
+          </div>
+          <div class="column has-text-right">
+            <button
+              class="button is-text mode-button"
+              @click="toggleDarkMode">
+              <i class="fas" :class="{'fa-moon': !dark, 'fa-sun': dark}"></i>
+              {{ dark ? 'Light' : 'Dark' }} mode
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 </template>
@@ -29,46 +37,53 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~bulma/sass/utilities/_all.sass";
+
 #headline {
-  display: flex;
-  align-items: center;
-  padding: 20px 72px;
   background-color: var(--element-color);
   -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
 
-  .title, .mode-wrapper {
-    display: flex;
-    flex-grow: 1;
-  }
+  .hero-body {
+    padding: 1.5rem 4rem;
 
-  .title {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--font-color);
-  }
+    .column {
+      padding: 0;
 
-  .mode-wrapper {
-    justify-content: flex-end;
-    text-align: right;
-
-    .btn-mode {
-      font-size: 14px;
-      border-radius: 8px;
-      padding: 8px 16px;
-      border: none;
-      background-color: transparent;
-      color: var(--font-color);
-      transition: all 180ms ease-in;
-
-      &:hover {
-        background-color: rgba(108, 108, 108, 0.1);
-        cursor: pointer;
+      &.title {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        color: var(--font-color);
       }
 
-      i {
-        margin-right: 2px;
+      .mode-button {
+        font-size: 14px;
+        color: var(--font-color);
+        text-decoration: none;
+
+        i {
+          margin-right: 2px;
+        }
+      }
+    }
+
+    @include mobile {
+      padding: 1.5rem 2rem;
+
+      .column.title {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.dark {
+  #headline {
+    .mode-button {
+      &:hover {
+        background-color: rgba(255, 255, 255, .1);
       }
     }
   }
