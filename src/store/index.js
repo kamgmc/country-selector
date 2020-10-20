@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { DARK_MODE } from '@/store/variables'
+import { COUNTRY_FIELD_FILTER, DARK_MODE } from '@/store/variables'
 import axios from 'axios'
 
 Vue.use(Vuex)
@@ -24,10 +24,17 @@ export default new Vuex.Store({
       if (localStorage.getItem(DARK_MODE)) {
         context.state.darkMode = JSON.parse(localStorage.getItem(DARK_MODE))
       }
-      context.dispatch('updateCountries')
+      context.dispatch('getAllCountries')
     },
-    updateCountries (context) {
-      axios.get(`${process.env.VUE_APP_API_URL}all`)
+    getAllCountries (context) {
+      axios.get(`${process.env.VUE_APP_API_URL}all${COUNTRY_FIELD_FILTER}`)
+        .then((response) => {
+          context.commit('setCountries', response.data)
+        })
+        .catch(reason => console.warn(reason))
+    },
+    getCountriesByRegion (context, region) {
+      axios.get(`${process.env.VUE_APP_API_URL}region/${region + COUNTRY_FIELD_FILTER}`)
         .then((response) => {
           context.commit('setCountries', response.data)
         })
