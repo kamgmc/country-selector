@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { SEARCH } from '@/store/variables'
 
 const current = {
   state: {
@@ -11,7 +10,6 @@ const current = {
   mutations: {
     setCurrentSearch (state, search) {
       state.search = search
-      localStorage.setItem(SEARCH, search)
     },
     setCurrentCountry (state, country) {
       state.country = country
