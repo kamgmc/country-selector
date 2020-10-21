@@ -1,5 +1,6 @@
 <template>
   <div id="app" :class="{dark}">
+    <Loader></Loader>
     <Headline></Headline>
     <router-view/>
   </div>
@@ -10,6 +11,7 @@
 </style>
 <script>
 import Headline from '@/components/Headline'
+import Loader from '@/components/Loader'
 
 export default {
   computed: {
@@ -17,6 +19,6 @@ export default {
       return this.$store.state.darkMode
     }
   },
-  components: { Headline }
+  components: { Loader, Headline }
 }
 </script>
