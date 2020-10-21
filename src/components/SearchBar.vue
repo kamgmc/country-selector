@@ -23,13 +23,14 @@ export default {
     }
   },
   methods: {
-    searchCountry () {
+    searchCountry (event) {
       if (this.search) {
         localStorage.setItem(SEARCH, this.search)
         this.$store.dispatch('getCountriesByName', this.search.toLowerCase().trim())
       } else {
         this.$store.dispatch('getAllCountries')
       }
+      event.target.blur()
     }
   },
   mounted () {
