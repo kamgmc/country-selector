@@ -13,21 +13,29 @@
 </template>
 
 <script>
+import { SEARCH } from '@/store/variables'
+
 export default {
   name: 'SearchBar',
   data () {
     return {
-      search: ''
+      search: null
     }
   },
   methods: {
     searchCountry () {
       if (this.search) {
+        localStorage.setItem(SEARCH, this.search)
         this.$store.dispatch('getCountriesByName', this.search.toLowerCase().trim())
       } else {
         this.$store.dispatch('getAllCountries')
       }
     }
+  },
+  mounted () {
+    this.search = localStorage.getItem(SEARCH)
+      ? localStorage.getItem(SEARCH)
+      : null
   }
 }
 </script>
