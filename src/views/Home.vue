@@ -17,13 +17,16 @@
     </div>
     <div class="hero-body">
       <div class="container is-fluid">
-        <div class="columns is is-marginless is-flex-wrap-wrap">
+        <div class="columns is is-marginless is-flex-wrap-wrap" v-if="countries">
           <Country
             v-for="country in countries"
             :key="country.name"
             :country="country"
             :to="`/details/${country.alpha3Code}`">
           </Country>
+        </div>
+        <div class="empty-result has-text-weight-bold" v-else>
+          {{ countries === null ? searchEmptyMessage : '' }}
         </div>
       </div>
     </div>
@@ -35,6 +38,7 @@
 import Country from '@/components/Country'
 import AppSelect from '@/components/AppSelect'
 import SearchBar from '@/components/SearchBar'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Home',
@@ -52,7 +56,8 @@ export default {
   computed: {
     countries () {
       return this.$store.state.current.countryList
-    }
+    },
+    ...mapGetters(['searchEmptyMessage'])
   },
   methods: {
     changeRegion (region) {
@@ -105,6 +110,12 @@ export default {
 
   .hero-body {
     padding: .75rem 0 2.5rem 0;
+
+    .empty-result {
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--font-color);
+    }
 
     @include mobile {
       .container {

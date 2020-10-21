@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import { SEARCH } from '@/store/variables'
-
 export default {
   name: 'SearchBar',
   data () {
@@ -25,7 +23,6 @@ export default {
   methods: {
     searchCountry (event) {
       if (this.search) {
-        localStorage.setItem(SEARCH, this.search)
         this.$store.dispatch('getCountriesByName', this.search.toLowerCase().trim())
       } else {
         this.$store.dispatch('getAllCountries')
@@ -34,9 +31,7 @@ export default {
     }
   },
   mounted () {
-    this.search = localStorage.getItem(SEARCH)
-      ? localStorage.getItem(SEARCH)
-      : null
+    this.search = this.$store.state.current.search
   }
 }
 </script>

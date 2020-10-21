@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { COUNTRIES, DARK_MODE } from '@/store/variables'
+import { COUNTRIES, DARK_MODE, SEARCH } from '@/store/variables'
 import axios from 'axios'
 import current from '@/store/modules/current'
 
@@ -32,6 +32,9 @@ export default new Vuex.Store({
     initializeStore (context) {
       if (localStorage.getItem(DARK_MODE)) {
         context.state.darkMode = JSON.parse(localStorage.getItem(DARK_MODE))
+      }
+      if (localStorage.getItem(SEARCH)) {
+        context.commit('setCurrentSearch', localStorage.getItem(SEARCH))
       }
       if (!localStorage.getItem(COUNTRIES)) {
         context.dispatch('getAllCountries')

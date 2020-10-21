@@ -1,12 +1,18 @@
 import axios from 'axios'
+import { SEARCH } from '@/store/variables'
 
 const current = {
   state: {
+    search: '',
     country: {},
     borders: [],
     countryList: []
   },
   mutations: {
+    setCurrentSearch (state, search) {
+      state.search = search
+      localStorage.setItem(SEARCH, search)
+    },
     setCurrentCountry (state, country) {
       state.country = country
     },
@@ -27,9 +33,14 @@ const current = {
     },
     getCountriesByName (context, name) {
       context.commit('showLoader')
+      context.commit('setCurrentSearch', name)
       axios.get(`${process.env.VUE_APP_API_URL}name/${name}`)
         .then(response => context.commit('setCurrentCountryList', response.data))
-        .catch(reason => console.warn(reason))
+        .catch(reason => {
+          reason.response.status === 404
+            ? context.commit('setCurrentCountryList', null)
+            : console.warn(reason)
+        })
         .finally(() => context.commit('hideLoader'))
     },
     updateCurrentCountry ({ rootState, commit, dispatch }, code) {
@@ -58,6 +69,11 @@ const current = {
       const borders = country.borders
       commit('setCurrentBorders',
         rootState.countries.filter(country => borders.indexOf(country.alpha3Code) > -1))
+    }
+  },
+  getters: {
+    searchEmptyMessage (state) {
+      return `Sorry, we couldn't find any country related to "${state.search}"`
     }
   }
 }
