@@ -64,6 +64,7 @@ export default {
         font-size: 14px;
         color: var(--font-color);
         text-decoration: none;
+        box-shadow: none;
 
         i {
           margin-right: 4px;
@@ -80,16 +81,6 @@ export default {
 
       .column.title {
         font-size: 14px;
-      }
-    }
-  }
-}
-
-.dark {
-  #headline {
-    .mode-button {
-      &:hover {
-        background-color: rgba(255, 255, 255, .1);
       }
     }
   }
