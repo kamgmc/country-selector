@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { COUNTRY_FIELD_FILTER, DARK_MODE } from '@/store/variables'
+import { COUNTRIES, DARK_MODE } from '@/store/variables'
 import axios from 'axios'
+import current from '@/store/modules/current'
 
 Vue.use(Vuex)
 
@@ -20,32 +21,32 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    //  Initialize
     initializeStore (context) {
       if (localStorage.getItem(DARK_MODE)) {
         context.state.darkMode = JSON.parse(localStorage.getItem(DARK_MODE))
       }
-      context.dispatch('getAllCountries')
+      if (!localStorage.getItem(COUNTRIES)) {
+        context.dispatch('getAllCountries')
+      } else {
+        const countries = JSON.parse(localStorage.getItem(COUNTRIES))
+        context.commit('setCountries', countries)
+        context.commit('setCurrentCountryList', countries)
+      }
     },
+    // Countries
     getAllCountries (context) {
-      axios.get(`${process.env.VUE_APP_API_URL}all${COUNTRY_FIELD_FILTER}`)
-        .then((response) => {
+      axios.get(`${process.env.VUE_APP_API_URL}all`)
+        .then(response => {
           context.commit('setCountries', response.data)
-        })
-        .catch(reason => console.warn(reason))
-    },
-    getCountriesByRegion (context, region) {
-      axios.get(`${process.env.VUE_APP_API_URL}region/${region + COUNTRY_FIELD_FILTER}`)
-        .then((response) => {
-          context.commit('setCountries', response.data)
-        })
-        .catch(reason => console.warn(reason))
-    },
-    getCountriesByName (context, name) {
-      axios.get(`${process.env.VUE_APP_API_URL}name/${name + COUNTRY_FIELD_FILTER}`)
-        .then((response) => {
-          context.commit('setCountries', response.data)
+          context.commit('setCurrentCountryList', response.data)
+          //  Save countries on localStorage
+          localStorage.setItem(COUNTRIES, JSON.stringify(response.data))
         })
         .catch(reason => console.warn(reason))
     }
+  },
+  modules: {
+    current
   }
 })

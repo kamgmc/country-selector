@@ -21,7 +21,8 @@
           <Country
             v-for="country in countries"
             :key="country.name"
-            :country="country">
+            :country="country"
+            :to="`/details/${country.alpha3Code}`">
           </Country>
         </div>
       </div>
@@ -50,7 +51,7 @@ export default {
   },
   computed: {
     countries () {
-      return this.$store.state.countries
+      return this.$store.state.current.countryList
     }
   },
   methods: {

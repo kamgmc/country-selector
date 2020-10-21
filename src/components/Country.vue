@@ -1,13 +1,13 @@
 <template>
   <div class="column is-one-quarter-desktop is-one-third-tablet country">
-    <div class="box">
+    <router-link class="box" :to="to">
       <figure class="image is-16by9">
         <img :src="country.flag" :alt="country.name">
       </figure>
       <div class="details">
         <div class="title has-text-weight-bold">{{ country.name }}</div>
         <div class="line">
-          <span class="has-text-weight-medium">Population:</span> {{ population }}
+          <span class="has-text-weight-medium">Population:</span> {{ country.population.toLocaleString() }}
         </div>
         <div class="line">
           <span class="has-text-weight-medium">Region:</span> {{ country.region }}
@@ -16,7 +16,7 @@
           <span class="has-text-weight-medium">Capital:</span> {{ country.capital }}
         </div>
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -24,11 +24,11 @@
 export default {
   name: 'Country',
   props: {
-    country: {}
-  },
-  computed: {
-    population () {
-      return this.country.population.toLocaleString('de-DE')
+    country: {},
+    to: {
+      type: String,
+      default: '',
+      required: true
     }
   }
 }
@@ -44,13 +44,28 @@ export default {
     padding: 0;
     background-color: var(--element-color);
 
+    &:hover, &:active {
+      box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1);
+      color: var(--font-color);
+
+      .image {
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+
     .image {
       border-bottom: 1px solid rgba(120, 120, 120, 0.1);
+      overflow: hidden;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
 
       img {
         border-top-left-radius: 6px;
         border-top-right-radius: 6px;
         object-fit: cover;
+        transition: transform 200ms ease-in-out;
       }
     }
 
@@ -65,8 +80,7 @@ export default {
   }
 
   @include mobile {
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
+    padding: 1.25rem 3rem;
   }
 }
 </style>

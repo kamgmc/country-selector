@@ -3,6 +3,8 @@
   --element-color: hsl(0, 0%, 100%);
   --background-color: hsl(0, 0%, 98%);
   --input-font-color: hsl(0, 0%, 52%);
+  --button-hover-background: whitesmoke;
+  background-color: var(--background-color);
 }
 
 #app.dark {
@@ -10,6 +12,7 @@
   --element-color: hsl(209, 23%, 22%);
   --background-color: hsl(207, 26%, 17%);
   --input-font-color: hsl(0, 0%, 100%);
+  --button-hover-background: rgba(255, 255, 255, .1);
 }
 
 $family-sans-serif: 'Nunito Sans', sans-serif;
@@ -22,6 +25,7 @@ $box-color: $body-color;
 $box-shadow: 0 0.2em .5em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
 $input-shadow: 0 0.2em .5em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
 $input-focus-box-shadow-size: 0;
+$button-color: var(--font-color);
 
 // Import only what you need from Bulma
 @import "~bulma/sass/utilities/_all.sass";
@@ -40,3 +44,27 @@ $input-focus-box-shadow-size: 0;
 @import "~bulma/sass/form/shared.sass";
 @import "~bulma/sass/form/input-textarea.sass";
 @import "~bulma/sass/form/tools.sass";
+
+
+.button {
+  padding: 1rem 2rem;
+
+  &.is-text {
+    text-decoration: none;
+    font-size: 14px;
+    color: $body-color;
+    background-color: var(--element-color);
+    box-shadow: 0 0 0.2em .1em rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.02);
+
+    &:hover {
+      color: $body-color;
+      background-color: var(--button-hover-background);
+    }
+  }
+
+  &.dense {
+    padding: .3rem .75rem;
+    line-height: 1;
+    height: auto;
+  }
+}
