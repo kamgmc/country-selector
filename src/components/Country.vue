@@ -44,7 +44,7 @@ export default {
     padding: 0;
     background-color: var(--element-color);
 
-    &:hover, &:active {
+    &:hover, &:active, &:focus {
       box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1);
       color: var(--font-color);
 
@@ -70,11 +70,12 @@ export default {
     }
 
     .details {
-      padding: 1rem 1.25rem;
+      padding: 1.25rem 1.25rem 2.5rem 1.25rem;
       font-size: 14px;
 
       .title {
-        margin-bottom: 16px;
+        margin-bottom: 1rem;
+        font-size: 16px;
       }
     }
   }
